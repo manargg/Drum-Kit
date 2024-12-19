@@ -9,20 +9,16 @@ for(var i =0; i< numOfButtons; i++)
 
     var buttonChar = this.innerHTML;
     makeSound(buttonChar);
+    buttonAnimation(buttonChar);
 
   })
 }
 
-document.addEventListener("keydown", function(event)
-{
-    makeSound(event.key)
-}
-);
 
 
-function makeSound(key)
+function makeSound(f)
 {
-    switch (key) {
+    switch (f) {
         case "w":
             var audio = new Audio("sounds/crash.mp3");
             audio.play();
@@ -62,4 +58,25 @@ function makeSound(key)
             break;
        }
 
+}
+
+
+
+document.addEventListener("keydown", function(e)
+{
+    makeSound(e.key);
+    buttonAnimation(e.key);
+}
+);
+
+function buttonAnimation(key)
+{
+
+   var activeButton =  document.querySelector("." + key);
+   activeButton.classList.add("pressed");
+
+   setTimeout(function()
+   {
+    activeButton.classList.remove("pressed");
+   }, 100);
 }
